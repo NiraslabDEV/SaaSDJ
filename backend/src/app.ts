@@ -52,6 +52,7 @@ const globalLimiter = rateLimit({
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { trustProxy: false },
   message: { error: 'Muitas requisições. Tente novamente em 15 minutos.', code: 'RATE_LIMITED' },
 });
 app.use('/api', globalLimiter);

@@ -1,10 +1,11 @@
-import { Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from '../../middlewares/authenticate';
 import * as usersService from './users.service';
 
-export async function getMe(req: AuthRequest, res: Response, next: NextFunction) {
+export async function getMe(req: Request, res: Response, next: NextFunction) {
   try {
-    const user = await usersService.getMe(req.user!.id);
+    const authReq = req as AuthRequest;
+    const user = await usersService.getMe(authReq.user!.id);
     res.json(user);
   } catch (err: any) {
     if (err.statusCode) return res.status(err.statusCode).json({ error: err.message, code: err.code });
@@ -12,9 +13,10 @@ export async function getMe(req: AuthRequest, res: Response, next: NextFunction)
   }
 }
 
-export async function updateMe(req: AuthRequest, res: Response, next: NextFunction) {
+export async function updateMe(req: Request, res: Response, next: NextFunction) {
   try {
-    const user = await usersService.updateMe(req.user!.id, req.body);
+    const authReq = req as AuthRequest;
+    const user = await usersService.updateMe(authReq.user!.id, req.body);
     res.json(user);
   } catch (err: any) {
     if (err.statusCode) return res.status(err.statusCode).json({ error: err.message, code: err.code });
@@ -22,7 +24,7 @@ export async function updateMe(req: AuthRequest, res: Response, next: NextFuncti
   }
 }
 
-export async function getArtist(req: AuthRequest, res: Response, next: NextFunction) {
+export async function getArtist(req: Request, res: Response, next: NextFunction) {
   try {
     const artist = await usersService.getArtistById(req.params.id);
     res.json(artist);
@@ -32,7 +34,7 @@ export async function getArtist(req: AuthRequest, res: Response, next: NextFunct
   }
 }
 
-export async function listArtists(_req: AuthRequest, res: Response, next: NextFunction) {
+export async function listArtists(_req: Request, res: Response, next: NextFunction) {
   try {
     const artists = await usersService.listArtists();
     res.json(artists);

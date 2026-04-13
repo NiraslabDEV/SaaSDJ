@@ -273,7 +273,7 @@ tailwind.config = {
 ---
 
 ## PRIORIDADE DE EXECUÇÃO
-1. Subir no git o projeto. e so dar outro git ao termino de cada tarefa em numero.
+1. Subir no git o projeto. e so dar outro git ao termino de cada tarefa em numero. https://github.com/NiraslabDEV/SaaSDJ
 1. Corrigir bookings.controller.ts (TAREFA 1)
 2. Criar api.js (base de tudo)
 3. Criar login.html + register.html

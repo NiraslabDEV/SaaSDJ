@@ -8,7 +8,7 @@ const router = Router();
 
 router.get('/me', authenticate, ctrl.getMe);
 router.patch('/me', authenticate, validate(updateUserSchema), ctrl.updateMe);
-router.get('/artists', authenticate, ctrl.listArtists);
-router.get('/artists/:id', authenticate, ctrl.getArtist);
+router.get('/artists', ctrl.listArtists);
+router.get('/artists/:id', ctrl.getArtist);
 
 export default router;

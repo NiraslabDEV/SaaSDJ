@@ -12,10 +12,11 @@ export interface AuthRequest extends Request {
 }
 
 export async function authenticate(
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) {
+  const authReq = req as AuthRequest;
   const authHeader = req.headers.authorization;
   if (!authHeader?.startsWith('Bearer ')) {
     return res.status(401).json({ error: 'Token não fornecido.', code: 'MISSING_TOKEN' });
@@ -31,7 +32,7 @@ export async function authenticate(
     if (!user) {
       return res.status(401).json({ error: 'Usuário não encontrado.', code: 'USER_NOT_FOUND' });
     }
-    req.user = user;
+    authReq.user = user;
     next();
   } catch {
     return res.status(401).json({ error: 'Token expirado.', code: 'TOKEN_EXPIRED' });

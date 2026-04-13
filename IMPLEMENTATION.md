@@ -143,6 +143,59 @@ backend/public/
 - [ ] Logout functionality
 - [ ] Mobile responsiveness
 
+## Review & Bug Fixes (Code Review Session)
+
+### Fix 1: AuthRequest Type Bug (Critical)
+**Problem:** Controllers and routes used `AuthRequest` directly as Express handler parameter type, which breaks the middleware chain since Express expects `Request` types.
+**Files Fixed:**
+- `backend/src/middlewares/authenticate.ts` — Changed `req: AuthRequest` → `req: Request`, added `const authReq = req as AuthRequest;`
+- `backend/src/modules/payments/payments.routes.ts` — Same pattern fix
+- `backend/src/modules/contracts/contracts.routes.ts` — Same pattern fix
+- `backend/src/modules/notifications/notifications.routes.ts` — Same pattern fix (3 handlers)
+- `backend/src/modules/users/users.controller.ts` — Same pattern fix (4 handlers)
+- **Status:** ✅ COMPLETED
+
+### Fix 2: Missing Tailwind Config (Visual)
+**Problem:** 4 HTML pages used custom color tokens (bg-primary, text-on-surface, etc.) without configuring Tailwind, so all custom colors were invisible.
+**Files Fixed:**
+- `backend/public/booking.html` — Added `tailwind.config` with full Material Design color tokens + removed CSS variable hack
+- `backend/public/booking-details.html` — Added `tailwind.config` + removed manual font-family CSS
+- `backend/public/profile.html` — Added `tailwind.config`
+- `backend/public/index.html` — Added `tailwind.config` + removed manual font CSS
+- **Status:** ✅ COMPLETED
+
+### Fix 3: Contract API Endpoint Mismatch
+**Problem:** Frontend called `POST /contracts/generate/${bookingId}` but backend route was `POST /contracts/${bookingId}`.
+**File Fixed:** `backend/public/js/api.js` — Changed endpoint from `/contracts/generate/${bookingId}` to `/contracts/${bookingId}`
+- **Status:** ✅ COMPLETED
+
+### Fix 4: Index Page — Mock Data & Auth Redirect
+**Problem:** Landing page used mock artist data instead of API, and redirected non-logged users to login instead of showing Login/Register buttons.
+**File Fixed:** `backend/public/index.html` — Replaced mock data with `getArtists()` API call, added dynamic nav (Login/Register for guests, Dashboard/Logout for logged-in), removed auth redirect
+- **Status:** ✅ COMPLETED
+
+### Fix 5: Profile Edit — Stub Implementation
+**Problem:** `editProfile()` was just an `alert()` placeholder.
+**File Fixed:** `backend/public/js/profile.js` — Implemented inline editing with input fields for name, bio, and genres; saves via `updateMe()` API call
+- **Status:** ✅ COMPLETED
+
+### Fix 6: Counter-Proposal Auto-Fill Timing Bug
+**Problem:** Auto-fill of counter-proposal form ran on `DOMContentLoaded` before async booking data loaded.
+**File Fixed:** `backend/public/js/booking-details.js` — Moved auto-fill logic into `populateBookingData()` (runs after API response)
+- **Status:** ✅ COMPLETED
+
+### Fix 7: Artists API — Public Access
+**Problem:** `GET /api/users/artists` required authentication, blocking landing page from showing artists to non-logged visitors.
+**Files Fixed:**
+- `backend/src/modules/users/users.routes.ts` — Removed `authenticate` middleware from artists listing route
+- `backend/public/js/api.js` — Added `getArtists()` function
+- **Status:** ✅ COMPLETED
+
+### Fix 8: Environment Configuration
+**Problem:** Missing `.env` file for local development.
+**File Created:** `backend/.env` — Development config with PostgreSQL, JWT secrets, and all required variables
+- **Status:** ✅ COMPLETED
+
 ## Next Steps (Not in scope)
 
 1. Backend API integration testing

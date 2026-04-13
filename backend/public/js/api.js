@@ -198,7 +198,7 @@ async function getEarnings() {
 // ============================================
 
 async function generateContract(bookingId) {
-  return apiFetch(`/contracts/generate/${bookingId}`, {
+  return apiFetch(`/contracts/${bookingId}`, {
     method: 'POST',
   });
 }
@@ -209,6 +209,14 @@ async function generateContract(bookingId) {
 
 async function getNotifications() {
   return apiFetch('/notifications');
+}
+
+// ============================================
+// Artists Functions
+// ============================================
+
+async function getArtists() {
+  return apiFetch('/users/artists');
 }
 
 // ============================================

@@ -62,6 +62,10 @@ function populateBookingData(booking) {
   const price = booking.basePrice || 0;
   document.getElementById('summary-price').textContent = price.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   document.getElementById('total-price').textContent = price.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+  // Auto-fill contraproposta com valores atuais
+  document.getElementById('counter-amount').value = booking.basePrice || '';
+  document.getElementById('counter-hours').value = booking.duration || '';
 }
 
 function setupFormVisibility(booking) {
@@ -142,10 +146,3 @@ async function generateContractPDF() {
   }
 }
 
-// Auto-fill contraproposta com valores atuais
-document.addEventListener('DOMContentLoaded', () => {
-  if (currentBooking) {
-    document.getElementById('counter-amount').value = currentBooking.basePrice || '';
-    document.getElementById('counter-hours').value = currentBooking.duration || '';
-  }
-});

@@ -28,7 +28,7 @@ window.addEventListener('load', async () => {
 
 function populateBookingData(booking) {
   // Título do evento
-  document.getElementById('event-title').textContent = booking.eventName || 'Evento';
+  document.getElementById('event-title').textContent = booking.artist?.name || booking.client?.name || 'Evento';
 
   // Status
   const statusMap = {
@@ -44,7 +44,7 @@ function populateBookingData(booking) {
   statusEl.className = `inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full ${status.class}`;
 
   // Data
-  const date = new Date(booking.dateTime);
+  const date = new Date(booking.eventDate);
   document.getElementById('summary-date').textContent = date.toLocaleDateString('pt-BR', { 
     weekday: 'long', 
     year: 'numeric', 
@@ -53,19 +53,19 @@ function populateBookingData(booking) {
   });
 
   // Local
-  document.getElementById('summary-location').textContent = booking.location || 'Local não especificado';
+  document.getElementById('summary-location').textContent = booking.locationAddress || 'Local não especificado';
 
   // Status
   document.getElementById('summary-status').textContent = status.label;
 
   // Preço
-  const price = booking.basePrice || 0;
+  const price = booking.totalAmount || 0;
   document.getElementById('summary-price').textContent = price.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   document.getElementById('total-price').textContent = price.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
   // Auto-fill contraproposta com valores atuais
-  document.getElementById('counter-amount').value = booking.basePrice || '';
-  document.getElementById('counter-hours').value = booking.duration || '';
+  document.getElementById('counter-amount').value = booking.totalAmount || '';
+  document.getElementById('counter-hours').value = booking.durationHours || '';
 }
 
 function setupFormVisibility(booking) {
@@ -106,8 +106,8 @@ async function submitCounterProposal() {
 
   try {
     const result = await sendCounterProposal(currentBooking.id, {
-      proposedAmount: amount,
-      proposedDuration: hours,
+      totalAmount: amount,
+      durationHours: hours,
       notes
     });
 
@@ -136,8 +136,8 @@ async function generateContractPDF() {
   try {
     const result = await generateContract(currentBooking.id);
     // Abrir em nova aba
-    if (result.pdfUrl) {
-      window.open(result.pdfUrl, '_blank');
+    if (result.contractPdfUrl) {
+      window.open(result.contractPdfUrl, '_blank');
     } else {
       alert('Erro ao gerar contrato');
     }

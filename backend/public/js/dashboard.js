@@ -40,7 +40,7 @@ async function loadDashboardData() {
     ]);
 
     // Preencher earnings
-    document.getElementById('earnings-amount').textContent = `R$ ${earningsData.total?.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) || '0,00'}`;
+    document.getElementById('earnings-amount').textContent = `R$ ${earningsData.monthly?.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) || '0,00'}`;
     document.getElementById('earnings-growth').textContent = `${earningsData.growth >= 0 ? '+' : ''}${earningsData.growth}%`;
 
     // Renderizar bookings
@@ -61,9 +61,9 @@ async function loadDashboardData() {
 function renderBookingRow(booking) {
   const statusClass = statusColors[booking.status] || 'bg-white/5 text-white/50';
   const statusLabel = statusLabels[booking.status] || booking.status;
-  const date = new Date(booking.dateTime).toLocaleDateString('pt-BR');
-  const location = booking.location || 'Local não especificado';
-  const eventName = booking.eventName || 'Evento';
+  const date = new Date(booking.eventDate).toLocaleDateString('pt-BR');
+  const location = booking.locationAddress || 'Local não especificado';
+  const eventName = booking.artist?.name || booking.client?.name || 'Evento';
 
   return `
     <div class="bg-surface-container-low hover:bg-surface-container-high transition-colors p-5 rounded-2xl flex items-center justify-between gap-4 cursor-pointer" onclick="window.location.href='/booking-details.html?bookingId=${booking.id}'">
@@ -78,7 +78,7 @@ function renderBookingRow(booking) {
       </div>
       <div class="hidden md:block">
         <div class="text-sm font-medium">Cachet</div>
-        <div class="text-xs text-on-surface-variant">R$ ${booking.basePrice?.toLocaleString('pt-BR') || '0'}</div>
+        <div class="text-xs text-on-surface-variant">R$ ${booking.totalAmount?.toLocaleString('pt-BR') || '0'}</div>
       </div>
       <div class="px-4 py-1.5 rounded-full ${statusClass} text-xs font-bold uppercase tracking-wider">
         ${statusLabel}

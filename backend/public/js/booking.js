@@ -117,8 +117,8 @@ function recalculatePrice() {
   const duration = parseInt(document.getElementById('duration-select').value);
   const hoursTotal = BASE_FEE + (duration * HOURLY_RATE) + LOGISTICS_FEE;
 
-  document.getElementById('set-hours-label').textContent = `Horas de Set (${duration}h)`;
   document.getElementById('set-hours-fee').textContent = `R$ ${(duration * HOURLY_RATE).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+  document.getElementById('logistics-fee').textContent = `R$ ${LOGISTICS_FEE.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
   document.getElementById('total-amount').textContent = `R$ ${hoursTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
 }
 
@@ -147,10 +147,9 @@ async function submitBooking() {
   try {
     const bookingData = {
       artistId,
-      location,
-      dateTime: `${selectedDate.toISOString().split('T')[0]}T${time}:00Z`,
-      duration,
-      basePrice: BASE_FEE + (duration * HOURLY_RATE) + LOGISTICS_FEE
+      locationAddress: location,
+      eventDate: `${selectedDate.toISOString().split('T')[0]}T${time}:00Z`,
+      durationHours: duration
     };
 
     const booking = await createBooking(bookingData);

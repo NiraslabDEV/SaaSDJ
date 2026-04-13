@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Perfil Profissional | Pulso Musical</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      body { min-height: max(884px, 100dvh); }
+    </style>
+  </head>
+  <body class="bg-background text-on-surface min-h-screen pb-32">
+    <!-- TopAppBar -->
+    <header class="bg-surface fixed top-0 z-50 w-full flex justify-between items-center px-6 py-4 h-16 border-b border-white/5">
+      <div class="flex items-center gap-4">
+        <a href="/dashboard.html" class="material-symbols-outlined text-primary cursor-pointer">arrow_back</a>
+        <h1 class="text-primary font-black tracking-tighter text-xl uppercase font-headline">Perfil Profissional</h1>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer">settings</span>
+      </div>
+    </header>
+
+    <main class="pt-24 px-6 max-w-2xl mx-auto space-y-10">
+      <!-- Profile Header -->
+      <section class="flex flex-col items-center text-center">
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-tr from-primary to-primary-container rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+          <img id="profile-photo" alt="DJ" class="relative w-32 h-32 rounded-full object-cover border-4 border-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD20leOuhmgMlmGQq5j02VMdWcb2Ak_wBDSnE8Q5N7J6DCq2scwsPjIyVff6emtoh0NcBdwyF-KYtr_hzESPm_x5XCCCsXrFk-yy_zvdI0FgennUoc3NKzCpMfoZoorxzvpzBDEgTEiiOchKzAu6-iIWl2ysfepK-RqrnCzc7Di65k7t4f2kuMinzdNk4Zn92W3jefhQAy3SGrESmnxRjlXmztVrhpBaUhXKysMe3G1eLaHfYp27nzlzScsVAzbRo_6HD30egsbVrg" />
+        </div>
+        <div class="mt-6 space-y-1">
+          <h2 id="profile-name" class="text-4xl font-headline font-bold tracking-tight text-on-surface uppercase">DJ Pulso</h2>
+          <p class="text-primary font-label text-sm font-medium tracking-[0.2em] uppercase">Profissional Premium</p>
+        </div>
+      </section>
+
+      <!-- Statistics Grid -->
+      <section class="grid grid-cols-2 md:grid-cols­3 gap-4">
+        <div class="bg-surface-container-low p-6 rounded-xl flex flex-col items-center justify-center space-y-1 border border-white/5">
+          <span id="profile-bookings" class="text-3xl font-headline font-extrabold text-on-surface">0</span>
+          <span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest text-center">Bookings realizados</span>
+        </div>
+        <div class="bg-surface-container-low p-6 rounded-xl flex flex-col items-center justify-center space-y-1 border border-white/5">
+          <div class="flex items-center gap-1">
+            <span class="text-3xl font-headline font-extrabold text-on-surface">5.0</span>
+            <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+          </div>
+          <span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest text-center">Estrelas</span>
+        </div>
+        <div class="col-span-2 md:col-span-1 bg-surface-container-low p-6 rounded-xl flex flex-col items-center justify-center space-y-1 border border-white/5">
+          <span id="profile-years" class="text-3xl font-headline font-extrabold text-on-surface">0</span>
+          <span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest text-center">Anos de Estrada</span>
+        </div>
+      </section>
+
+      <!-- Bio & Genres -->
+      <section class="space-y-6">
+        <div class="space-y-3">
+          <h3 class="text-xs font-label text-on-surface-variant uppercase tracking-[0.3em]">Biografia</h3>
+          <p id="profile-bio" class="text-on-surface leading-relaxed font-body text-base">
+            Profissional experiente em composição de atmosferas musicais e entretenimento.
+          </p>
+        </div>
+        <div id="profile-genres" class="flex flex-wrap gap-2">
+          <!-- Genres loaded by JS -->
+        </div>
+      </section>
+
+      <!-- Settings List -->
+      <section class="bg-surface-container-low rounded-3xl overflow-hidden border border-white/5">
+        <div class="divide-y divide-outline-variant/10">
+          <button onclick="editProfile()" class="w-full flex items-center justify-between px-6 py-5 hover:bg-surface-container-high transition-colors active:scale-[0.98]">
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-on-surface-variant">person_edit</span>
+              <span class="text-on-surface font-medium text-sm">Editar Perfil</span>
+            </div>
+            <span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+          </button>
+          <button class="w-full flex items-center justify-between px-6 py-5 hover:bg-surface-container-high transition-colors active:scale-[0.98]">
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-on-surface-variant">calendar_month</span>
+              <div class="text-left">
+                <span class="text-on-surface font-medium text-sm block">Sincronização Google Agenda</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Ativo</span>
+              <span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+            </div>
+          </button>
+          <button class="w-full flex items-center justify-between px-6 py-5 hover:bg-surface-container-high transition-colors active:scale-[0.98]">
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+              <span class="text-on-surface font-medium text-sm">Configurações de Notificação</span>
+            </div>
+            <span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-8 px-8 bg-surface border-t border-white/5 mt-10">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-7xl mx-auto">
+        <span class="font-headline font-bold text-primary">Pulso Musical</span>
+        <p class="font-body text-xs text-white/40">© 2024 Pulso Musical. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/profile.js"></script>
+  </body>
+</html>

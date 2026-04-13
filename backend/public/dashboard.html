@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dashboard | Pulso Musical</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed-dim": "#bacae4",
+              "surface-container-highest": "#262626",
+              "on-background": "#ffffff",
+              "tertiary-container": "#cfdef5",
+              "on-primary-container": "#525c00",
+              "on-secondary-fixed": "#29394e",
+              "on-surface-variant": "#adaaaa",
+              "surface-tint": "#f7ffba",
+              "on-primary": "#5a6500",
+              "primary-fixed-dim": "#d2e900",
+              "on-error": "#450900",
+              "inverse-on-surface": "#565555",
+              "secondary-container": "#38485d",
+              "on-secondary": "#3c4c61",
+              "error-container": "#b92902",
+              "on-primary-fixed": "#414900",
+              "outline-variant": "#484847",
+              "on-secondary-fixed-variant": "#46556b",
+              primary: "#f7ffba",
+              "on-secondary-container": "#c1d1eb",
+              "secondary-fixed": "#c8d8f3",
+              background: "#0e0e0e",
+              "error-dim": "#d53d18",
+              "tertiary-fixed": "#cfdef5",
+              "surface-bright": "#2c2c2c",
+              "on-tertiary-container": "#414f62",
+              "tertiary-fixed-dim": "#c1d0e6",
+              "primary-fixed": "#e0f800",
+              outline: "#767575",
+              error: "#ff7351",
+              "on-error-container": "#ffd2c8",
+              "surface-container-lowest": "#000000",
+              "on-tertiary-fixed-variant": "#4a596c",
+              "surface-container-low": "#131313",
+              tertiary: "#e0ecff",
+              "on-primary-fixed-variant": "#5c6700",
+              "tertiary-dim": "#c1d0e6",
+              secondary: "#c8d8f3",
+              "on-surface": "#ffffff",
+              "surface-container-high": "#20201f",
+              "secondary-dim": "#bacae4",
+              "surface-variant": "#262626",
+              "on-tertiary": "#49586b",
+              "inverse-surface": "#fcf9f8",
+              "surface-dim": "#0e0e0e",
+              "surface-container": "#1a1a1a",
+              "on-tertiary-fixed": "#2e3d4e",
+              "inverse-primary": "#5a6500",
+              surface: "#0e0e0e",
+              "primary-container": "#e0f800",
+              "primary-dim": "#d8ef00"
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem"
+            },
+            fontFamily: {
+              headline: ["Manrope"],
+              body: ["Inter"],
+              label: ["Inter"]
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background font-body antialiased">
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full flex md:hidden items-center justify-between p-6 bg-surface z-50 border-b border-white/5">
+      <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary">menu</span>
+        <span class="text-xl font-black tracking-tighter text-primary uppercase">Pulso Musical</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span id="notifications-btn" class="material-symbols-outlined text-primary cursor-pointer">notifications</span>
+      </div>
+    </nav>
+
+    <!-- Desktop Sidebar -->
+    <aside class="hidden lg:flex flex-col fixed left-0 top-0 h-screen p-6 w-72 border-r border-white/5 bg-surface z-50">
+      <div class="text-primary font-black text-2xl mb-8 uppercase tracking-tighter">Pulso Musical</div>
+      
+      <div class="flex items-center gap-4 mb-10 p-2 bg-surface-container-low rounded-xl">
+        <img class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXJrd9w2kRQJ7f8Xp2_6iGs1etJgWcZQkvB2mLJbCZgS4_93XIN9PN_rWU0v2wXpNATUJxDOxLBEJ-9uryxnoBkKrLSGcHelqXgg5MDL3DvQ-6tdUEvvRwjBgR2xrCNffxUyi3kr3RaGFpgmbRZRcGJpql7bGS4uGl3EOQkxI0AN-LHchqpAxgFzxpAVd9UvpRV58v-_35VCRm5uTP6KkWCys3LaF5tMKKrwG-ANuegS6l39ZcMM8CTMKVto5reA5TxaxquamOUHk" />
+        <div>
+          <div id="user-name" class="font-headline font-semibold text-on-surface">Alex Storm</div>
+          <div class="text-xs text-white/40">Painel do Artista</div>
+        </div>
+      </div>
+
+      <nav class="flex flex-col gap-2">
+        <a class="flex items-center gap-3 px-4 py-3 text-primary bg-surface-container-low rounded-r-full translate-x-1 transition-all duration-300" href="/dashboard.html">
+          <span class="material-symbols-outlined">explore</span>
+          <span class="font-headline font-semibold">Explorar</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-surface-container-high transition-all duration-300 rounded-r-full" href="/calendar.html">
+          <span class="material-symbols-outlined">calendar_today</span>
+          <span class="font-headline font-semibold">Agenda</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-surface-container-high transition-all duration-300 rounded-r-full" href="/bookings.html">
+          <span class="material-symbols-outlined">confirmation_number</span>
+          <span class="font-headline font-semibold">Meus Bookings</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-surface-container-high transition-all duration-300 rounded-r-full" href="/profile.html">
+          <span class="material-symbols-outlined">person</span>
+          <span class="font-headline font-semibold">Perfil</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto pt-6 border-t border-white/5">
+        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-white/40 hover:text-error transition-all duration-300">
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-headline font-semibold">Sair</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="lg:ml-72 min-h-screen pt-20 md:pt-8 pb-32 px-4 md:px-10 max-w-[1400px] mx-auto">
+      <!-- Header -->
+      <header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-2">
+          <h1 class="text-4xl md:text-5xl font-bold font-headline tracking-tight text-on-surface">
+            Seu Pulso, <span class="text-primary-fixed">Sua Carreira.</span>
+          </h1>
+          <p class="text-on-surface-variant max-w-md">Visão geral do seu desempenho financeiro e logística para os próximos eventos confirmados.</p>
+        </div>
+      </header>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <!-- Earnings Card -->
+        <div class="md:col-span-2 bg-surface-container-low rounded-[2rem] p-8 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-8">
+            <span class="material-symbols-outlined text-primary text-4xl opacity-20">trending_up</span>
+          </div>
+          <div>
+            <h3 class="text-on-surface-variant font-medium text-sm uppercase tracking-widest mb-4">Ganhos Mensais</h3>
+            <div class="flex items-baseline gap-2">
+              <span id="earnings-amount" class="text-5xl font-bold font-headline">R$ 0</span>
+              <span id="earnings-growth" class="text-primary text-sm font-bold">+0%</span>
+            </div>
+          </div>
+          <div class="mt-8 flex items-end gap-1 h-24">
+            <div class="w-full bg-white/5 rounded-t-lg h-[40%]"></div>
+            <div class="w-full bg-white/5 rounded-t-lg h-[60%]"></div>
+            <div class="w-full bg-white/10 rounded-t-lg h-[45%]"></div>
+            <div class="w-full bg-white/5 rounded-t-lg h-[75%]"></div>
+            <div class="w-full bg-primary-container rounded-t-lg h-[90%]"></div>
+            <div class="w-full bg-white/20 rounded-t-lg h-[65%]"></div>
+            <div class="w-full bg-white/5 rounded-t-lg h-[55%]"></div>
+          </div>
+        </div>
+
+        <!-- Upcoming Payments -->
+        <div id="upcoming-payments" class="bg-primary text-on-primary rounded-[2rem] p-8 flex flex-col justify-between">
+          <div>
+            <h3 class="font-medium text-sm uppercase tracking-widest mb-4 opacity-70">Próximos Pagamentos</h3>
+            <div class="space-y-4">
+              <div class="flex justify-between items-center border-b border-on-primary/10 pb-4">
+                <div>
+                  <div class="font-bold">Club Neon</div>
+                  <div class="text-xs opacity-60">Previsto para 15 Out</div>
+                </div>
+                <div class="font-bold">R$ 4.200</div>
+              </div>
+              <div class="flex justify-between items-center border-b border-on-primary/10 pb-4">
+                <div>
+                  <div class="font-bold">Privilege Summer</div>
+                  <div class="text-xs opacity-60">Previsto para 18 Out</div>
+                </div>
+                <div class="font-bold">R$ 7.500</div>
+              </div>
+            </div>
+          </div>
+          <button class="w-full bg-on-primary text-primary py-4 rounded-xl font-bold mt-6 hover:scale-[1.02] transition-transform">Ver Todos</button>
+        </div>
+      </div>
+
+      <!-- Bookings Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <!-- Bookings Column -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold font-headline">Pedidos Recentes</h2>
+            <button class="text-primary text-sm font-semibold hover:underline">Filtrar por Status</button>
+          </div>
+          <div id="bookings-list" class="space-y-4">
+            <!-- Bookings will be loaded here by JS -->
+          </div>
+        </div>
+
+        <!-- Calendar Column -->
+        <div class="space-y-6">
+          <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold font-headline">Sua Agenda</h2>
+            <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">sync</span>
+          </div>
+          <div class="bg-surface-container-low rounded-[2rem] p-6 border border-white/5">
+            <div class="flex items-center gap-3 mb-6">
+              <img class="w-8 h-8 rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjepQtenorjPj6STimeBLLYFboo3Ugw_8xg20QEmt6cbWGxcEhD1LG1SSfcN_2T2wuPFVlnmX566t7VuQIRksawSkfHxAWVaUPIJneOBLEYEJ8xR2fco9AMtfKnI-4eNebpCiozi2bpJYhchWQDwzaagmcuHoUZYpCJ_5Jr_uFQ_iLzav6Iceu8SmqEZ0Qf5_EVawbn9LdB5lysH_lKt3dMjUF9cRTORe2HoQNxRTNGSH05WRDFSQ3lyt-Jdhlg7AHrbkhG2lXjo4" />
+              <span class="text-sm font-semibold">Sincronizado com Google</span>
+            </div>
+            <button class="w-full py-4 mt-8 bg-surface-container-highest text-on-surface font-semibold rounded-xl text-sm hover:bg-white/10 transition-colors">
+              Abrir Calendário Completo
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-surface-container-low/90 backdrop-blur-xl z-50 md:hidden rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+      <a class="flex flex-col items-center justify-center text-primary bg-surface-container-highest rounded-xl px-3 py-1 scale-90 transition-all" href="/dashboard.html">
+        <span class="material-symbols-outlined">explore</span>
+        <span class="font-label text-[10px] font-medium uppercase tracking-widest mt-1">Explorar</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-white/50 hover:text-white transition-all" href="/calendar.html">
+        <span class="material-symbols-outlined">calendar_today</span>
+        <span class="font-label text-[10px] font-medium uppercase tracking-widest mt-1">Agenda</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-white/50 hover:text-white transition-all" href="/bookings.html">
+        <span class="material-symbols-outlined">confirmation_number</span>
+        <span class="font-label text-[10px] font-medium uppercase tracking-widest mt-1">Bookings</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-white/50 hover:text-white transition-all" href="/profile.html">
+        <span class="material-symbols-outlined">person</span>
+        <span class="font-label text-[10px] font-medium uppercase tracking-widest mt-1">Perfil</span>
+      </a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="w-full py-12 px-8 mt-auto bg-surface border-t border-white/5">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-7xl mx-auto">
+        <div class="font-headline font-bold text-primary">Pulso Musical</div>
+        <div class="flex gap-6">
+          <a class="text-white/40 hover:text-primary transition-colors text-xs" href="#">Termos</a>
+          <a class="text-white/40 hover:text-primary transition-colors text-xs" href="#">Privacidade</a>
+          <a class="text-white/40 hover:text-primary transition-colors text-xs" href="#">Contato</a>
+        </div>
+        <div class="text-xs text-white/40">© 2024 Pulso Musical. Todos os direitos reservados.</div>
+      </div>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>

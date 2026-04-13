@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#5a6500",
+                    "error-dim": "#d53d18",
+                    "surface-container-high": "#20201f",
+                    "on-secondary-fixed-variant": "#46556b",
+                    "background": "#0e0e0e",
+                    "inverse-on-surface": "#565555",
+                    "inverse-surface": "#fcf9f8",
+                    "on-secondary": "#3c4c61",
+                    "on-primary-fixed": "#414900",
+                    "secondary": "#c8d8f3",
+                    "tertiary-dim": "#c1d0e6",
+                    "surface-container-lowest": "#000000",
+                    "surface-container": "#1a1a1a",
+                    "surface-tint": "#f7ffba",
+                    "secondary-fixed": "#c8d8f3",
+                    "on-tertiary-fixed": "#2e3d4e",
+                    "surface-variant": "#262626",
+                    "on-primary-fixed-variant": "#5c6700",
+                    "on-error": "#450900",
+                    "outline": "#767575",
+                    "primary-fixed": "#e0f800",
+                    "on-error-container": "#ffd2c8",
+                    "on-primary": "#5a6500",
+                    "on-secondary-container": "#c1d1eb",
+                    "surface-container-low": "#131313",
+                    "on-background": "#ffffff",
+                    "secondary-dim": "#bacae4",
+                    "tertiary-fixed": "#cfdef5",
+                    "on-tertiary": "#49586b",
+                    "secondary-container": "#38485d",
+                    "primary-dim": "#d8ef00",
+                    "tertiary-fixed-dim": "#c1d0e6",
+                    "surface": "#0e0e0e",
+                    "error-container": "#b92902",
+                    "primary": "#f7ffba",
+                    "surface-dim": "#0e0e0e",
+                    "secondary-fixed-dim": "#bacae4",
+                    "surface-container-highest": "#262626",
+                    "on-tertiary-fixed-variant": "#4a596c",
+                    "surface-bright": "#2c2c2c",
+                    "on-tertiary-container": "#414f62",
+                    "tertiary-container": "#cfdef5",
+                    "on-surface": "#ffffff",
+                    "on-primary-container": "#525c00",
+                    "error": "#ff7351",
+                    "on-surface-variant": "#adaaaa",
+                    "on-secondary-fixed": "#29394e",
+                    "primary-container": "#e0f800",
+                    "tertiary": "#e0ecff",
+                    "primary-fixed-dim": "#d2e900",
+                    "outline-variant": "#484847"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0e0e0e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+        .editorial-shadow {
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5);
+        }
+        .glass-card {
+            background: rgba(38, 38, 38, 0.6);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#0e0e0e] fixed top-0 z-50 w-full flex justify-between items-center px-6 py-4 h-16 tonal-shift-via-bg-shift">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#e6ff00] active:scale-95 transition-transform cursor-pointer" data-icon="menu">menu</span>
+<h1 class="text-[#e6ff00] font-black tracking-tighter text-xl uppercase font-['Manrope']">Perfil Profissional</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#adaaaa] hover:text-[#e6ff00] transition-colors duration-300 cursor-pointer" data-icon="settings">settings</span>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto space-y-10">
+<!-- Profile Header Section -->
+<section class="flex flex-col items-center text-center">
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-tr from-primary to-primary-container rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+<img alt="DJ Pulso" class="relative w-32 h-32 rounded-full object-cover border-4 border-surface-variant" data-alt="Professional close-up portrait of a DJ with headphones in a dark studio with dramatic neon lime green lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD20leOuhmgMlmGQq5j02VMdWcb2Ak_wBDSnE8Q5N7J6DCq2scwsPjIyVff6emtoh0NcBdwyF-KYtr_hzESPm_x5XCCCsXrFk-yy_zvdI0FgennUoc3NKzCpMfoZoorxzvpzBDEgTEiiOchKzAu6-iIWl2ysfepK-RqrnCzc7Di65k7t4f2kuMinzdNk4Zn92W3jefhQAy3SGrESmnxRjlXmztVrhpBaUhXKysMe3G1eLaHfYp27nzlzScsVAzbRo_6HD30egsbVrg"/>
+</div>
+<div class="mt-6 space-y-1">
+<h2 class="text-4xl font-headline font-bold tracking-tight text-on-surface uppercase">DJ Pulso</h2>
+<p class="text-primary font-label text-sm font-medium tracking-[0.2em] uppercase">Curador Premium</p>
+</div>
+<!-- Social Icons -->
+<div class="flex gap-6 mt-6">
+<a class="text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-[28px]" data-icon="brand_awareness">brand_awareness</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-[28px]" data-icon="graphic_eq">graphic_eq</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-[28px]" data-icon="album">album</span>
+</a>
+</div>
+</section>
+<!-- Statistics Bento Grid -->
+<section class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col items-center justify-center space-y-1 border-none">
+<span class="text-3xl font-headline font-extrabold text-on-surface">124</span>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest text-center">Bookings realizados</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col items-center justify-center space-y-1 border-none">
+<div class="flex items-center gap-1">
+<span class="text-3xl font-headline font-extrabold text-on-surface">4.9</span>
+<span class="material-symbols-outlined text-primary text-xl" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest text-center">Estrelas</span>
+</div>
+<div class="col-span-2 md:col-span-1 bg-surface-container-low p-6 rounded-xl flex flex-col items-center justify-center space-y-1 border-none">
+<span class="text-3xl font-headline font-extrabold text-on-surface">10</span>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest text-center">Anos de Estrada</span>
+</div>
+</section>
+<!-- Bio & Genres -->
+<section class="space-y-6">
+<div class="space-y-3">
+<h3 class="text-xs font-label text-on-surface-variant uppercase tracking-[0.3em]">Biografia</h3>
+<p class="text-on-surface leading-relaxed font-body text-base">
+                    Especialista em criar atmosferas imersivas, DJ Pulso transita com maestria entre o Deep House contemplativo e o Techno Melódico de alta energia. Com uma década de experiência nas principais cabines do país, sua curadoria é focada na progressão harmônica e texturas orgânicas.
+                </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 rounded-full bg-surface-container-high text-primary text-xs font-label font-semibold border border-outline-variant/20 uppercase tracking-wider">Deep House</span>
+<span class="px-4 py-2 rounded-full bg-surface-container-high text-primary text-xs font-label font-semibold border border-outline-variant/20 uppercase tracking-wider">Melodic Techno</span>
+<span class="px-4 py-2 rounded-full bg-surface-container-high text-primary text-xs font-label font-semibold border border-outline-variant/20 uppercase tracking-wider">Nu Disco</span>
+</div>
+</section>
+<!-- Account Settings List -->
+<section class="bg-surface-container-low rounded-3xl overflow-hidden">
+<div class="divide-y divide-outline-variant/10">
+<button class="w-full flex items-center justify-between px-6 py-5 hover:bg-surface-container-high transition-colors active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="person_edit">person_edit</span>
+<span class="text-on-surface font-medium text-sm font-body">Editar Perfil</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between px-6 py-5 hover:bg-surface-container-high transition-colors active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="calendar_month">calendar_month</span>
+<div class="text-left">
+<span class="text-on-surface font-medium text-sm font-body block">Sincronização Google Agenda</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Ativo</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+</button>
+<button class="w-full flex items-center justify-between px-6 py-5 hover:bg-surface-container-high transition-colors active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+<span class="text-on-surface font-medium text-sm font-body">Configurações de Notificação</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between px-6 py-5 hover:bg-surface-container-high transition-colors active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="description">description</span>
+<span class="text-on-surface font-medium text-sm font-body">Gerenciar Documentos (Riders/Contratos)</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between px-6 py-5 hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-error" data-icon="logout">logout</span>
+<span class="text-error font-bold text-sm font-body">Sair</span>
+</div>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full bg-[#131313]/90 backdrop-blur-xl z-50 rounded-t-[32px] shadow-[0_-8px_30px_rgb(0,0,0,0.5)] flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-[#adaaaa] px-5 py-2 hover:text-[#f7ffba] active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adaaaa] px-5 py-2 hover:text-[#f7ffba] active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Agendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adaaaa] px-5 py-2 hover:text-[#f7ffba] active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="local_taxi">local_taxi</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Logística</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#262626] text-[#e6ff00] rounded-[16px] px-5 py-2 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Perfil</span>
+</a>
+</nav>
+</body></html>

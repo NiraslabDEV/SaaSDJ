@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pulso Musical - Agendar Performance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#bacae4",
+                        "surface-container-highest": "#262626",
+                        "on-background": "#ffffff",
+                        "tertiary-container": "#cfdef5",
+                        "on-primary-container": "#525c00",
+                        "on-secondary-fixed": "#29394e",
+                        "on-surface-variant": "#adaaaa",
+                        "surface-tint": "#f7ffba",
+                        "on-primary": "#5a6500",
+                        "primary-fixed-dim": "#d2e900",
+                        "on-error": "#450900",
+                        "inverse-on-surface": "#565555",
+                        "secondary-container": "#38485d",
+                        "on-secondary": "#3c4c61",
+                        "error-container": "#b92902",
+                        "on-primary-fixed": "#414900",
+                        "outline-variant": "#484847",
+                        "on-secondary-fixed-variant": "#46556b",
+                        "primary": "#f7ffba",
+                        "on-secondary-container": "#c1d1eb",
+                        "secondary-fixed": "#c8d8f3",
+                        "background": "#0e0e0e",
+                        "error-dim": "#d53d18",
+                        "tertiary-fixed": "#cfdef5",
+                        "surface-bright": "#2c2c2c",
+                        "on-tertiary-container": "#414f62",
+                        "tertiary-fixed-dim": "#c1d0e6",
+                        "primary-fixed": "#e0f800",
+                        "outline": "#767575",
+                        "error": "#ff7351",
+                        "on-error-container": "#ffd2c8",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary-fixed-variant": "#4a596c",
+                        "surface-container-low": "#131313",
+                        "tertiary": "#e0ecff",
+                        "on-primary-fixed-variant": "#5c6700",
+                        "tertiary-dim": "#c1d0e6",
+                        "secondary": "#c8d8f3",
+                        "on-surface": "#ffffff",
+                        "surface-container-high": "#20201f",
+                        "secondary-dim": "#bacae4",
+                        "surface-variant": "#262626",
+                        "on-tertiary": "#49586b",
+                        "inverse-surface": "#fcf9f8",
+                        "surface-dim": "#0e0e0e",
+                        "surface-container": "#1a1a1a",
+                        "on-tertiary-fixed": "#2e3d4e",
+                        "inverse-primary": "#5a6500",
+                        "surface": "#0e0e0e",
+                        "primary-container": "#e0f800",
+                        "primary-dim": "#d8ef00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0e0e0e;
+            color: #ffffff;
+        }
+        .headline-font { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#0e0e0e] flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#131313]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#e6ff00] cursor-pointer">menu</span>
+<h1 class="text-xl font-black tracking-tighter text-[#e6ff00] uppercase headline-font">Pulso Musical</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#e6ff00] cursor-pointer">notifications</span>
+</div>
+</header>
+<main class="flex-grow w-full max-w-7xl mx-auto px-4 md:px-8 py-8">
+<!-- Editorial Header -->
+<section class="mb-12">
+<span class="text-primary font-label text-xs tracking-widest uppercase mb-2 block">Reserva de Artista</span>
+<h2 class="headline-font text-4xl md:text-5xl font-bold tracking-tight mb-4">Agendar Performance</h2>
+<p class="text-on-surface-variant max-w-2xl text-lg">Configure os detalhes da sua apresentação. O cálculo de custos é atualizado em tempo real para total transparência.</p>
+</section>
+<!-- Booking Flow Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Inputs -->
+<div class="lg:col-span-7 space-y-8">
+<!-- Date Selection (Calendar-like Grid) -->
+<div class="bg-surface-container-low p-6 rounded-xl border-none">
+<div class="flex justify-between items-center mb-6">
+<h3 class="headline-font text-xl font-semibold">1. Selecione a Data</h3>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-2 text-center mb-4">
+<div class="text-xs text-on-surface-variant font-medium">DOM</div>
+<div class="text-xs text-on-surface-variant font-medium">SEG</div>
+<div class="text-xs text-on-surface-variant font-medium">TER</div>
+<div class="text-xs text-on-surface-variant font-medium">QUA</div>
+<div class="text-xs text-on-surface-variant font-medium">QUI</div>
+<div class="text-xs text-on-surface-variant font-medium">SEX</div>
+<div class="text-xs text-on-surface-variant font-medium">SÁB</div>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<!-- Simplified Calendar Mock -->
+<div class="h-12 flex items-center justify-center text-on-surface-variant opacity-30">28</div>
+<div class="h-12 flex items-center justify-center text-on-surface-variant opacity-30">29</div>
+<div class="h-12 flex items-center justify-center text-on-surface-variant opacity-30">30</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">1</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">2</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">3</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">4</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">5</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">6</div>
+<div class="h-12 flex items-center justify-center bg-primary text-on-primary rounded-lg font-bold cursor-pointer">7</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">8</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">9</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">10</div>
+<div class="h-12 flex items-center justify-center hover:bg-surface-container-high rounded-lg cursor-pointer">11</div>
+</div>
+</div>
+<!-- Event Details -->
+<div class="bg-surface-container-low p-6 rounded-xl space-y-6">
+<h3 class="headline-font text-xl font-semibold">2. Detalhes do Evento</h3>
+<div class="space-y-4">
+<div class="group">
+<label class="block text-xs font-medium text-on-surface-variant mb-2 uppercase tracking-wider">Local da Performance</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span>
+<input class="w-full bg-surface-container-highest border-none py-4 pl-12 pr-4 rounded-xl focus:ring-2 focus:ring-primary transition-all text-on-surface outline-none" placeholder="Endereço completo ou nome do local" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="group">
+<label class="block text-xs font-medium text-on-surface-variant mb-2 uppercase tracking-wider">Duração do Set</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">timer</span>
+<select class="w-full bg-surface-container-highest border-none py-4 pl-12 pr-4 rounded-xl focus:ring-2 focus:ring-primary transition-all text-on-surface appearance-none outline-none">
+<option>2 Horas</option>
+<option selected="">3 Horas</option>
+<option>4 Horas</option>
+<option>6 Horas (All Night Long)</option>
+</select>
+</div>
+</div>
+<div class="group">
+<label class="block text-xs font-medium text-on-surface-variant mb-2 uppercase tracking-wider">Início Previsto</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">schedule</span>
+<input class="w-full bg-surface-container-highest border-none py-4 pl-12 pr-4 rounded-xl focus:ring-2 focus:ring-primary transition-all text-on-surface outline-none" type="time" value="22:00"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Logistics Preview (Map Mockup) -->
+<div class="relative h-64 w-full rounded-2xl overflow-hidden group">
+<img class="w-full h-full object-cover filter grayscale brightness-50 contrast-125" data-alt="dark stylized city map with glowing yellow routes and points of interest representing nightclub locations at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtSH4ujPKmPkeNnvsY0tCr15SQrQ74cXlSAMbuPIgVhCfMBzqFowI2XkAA3lmJHABaXM9hQlAypXv38va_7BY--vCo9ojiLBrOBP-qZehMiDHZpFAau4Acn7ygw0qQ2sy7TYA_gOluAi74e2k_lTwnDRaOhfTU3iliwxi43ITHyBhCmTg_PU9N2YbR8G4rzS3GEDFim-cRWE_kmvVYWRmog3bu1_DbuVtjY_99lFX1e8uHWH-dVZlZDo7j0xP0FS119AJfE-d9pa4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+<div class="flex items-center gap-3 bg-surface-container-high/80 backdrop-blur-md px-4 py-3 rounded-full">
+<span class="material-symbols-outlined text-secondary-fixed-dim">directions_car</span>
+<span class="text-sm font-medium">Estimativa Uber: 12 min</span>
+</div>
+<div class="text-primary flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined">near_me</span>
+<span class="text-xs">LOGÍSTICA ATIVA</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary & Checkout -->
+<div class="lg:col-span-5">
+<div class="bg-surface-container-low p-8 rounded-2xl sticky top-24 border border-white/5">
+<h3 class="headline-font text-2xl font-bold mb-8">Resumo da Proposta</h3>
+<div class="space-y-6 mb-8">
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-sm">Taxa Base (Booking)</span>
+<span class="text-xs text-on-surface-variant/60 italic">Reserva e Curadoria</span>
+</div>
+<span class="font-headline font-bold">R$ 1.200,00</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-sm">Horas de Set (3h)</span>
+<span class="text-xs text-on-surface-variant/60 italic">R$ 300/hora</span>
+</div>
+<span class="font-headline font-bold">R$ 900,00</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-sm">Logística (Uber Black)</span>
+<span class="text-xs text-on-surface-variant/60 italic">Ida e Volta Estimado</span>
+</div>
+<span class="font-headline font-bold">R$ 145,00</span>
+</div>
+<div class="pt-6 border-t border-white/10 flex justify-between items-end">
+<div>
+<span class="text-primary font-bold text-xs uppercase tracking-widest block mb-1">Total Estimado</span>
+<span class="text-4xl headline-font font-black tracking-tighter text-on-surface">R$ 2.245,00</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-5 rounded-full headline-font font-black text-lg uppercase tracking-wider flex items-center justify-center gap-3 active:scale-95 transition-all shadow-lg shadow-primary/10">
+                        Enviar Proposta
+                        <span class="material-symbols-outlined">send</span>
+</button>
+<p class="text-center text-xs text-on-surface-variant mt-6 px-4">
+                        Ao enviar, o artista receberá uma notificação imediata. O pagamento é processado apenas após a confirmação.
+                    </p>
+</div>
+<!-- Artist Card (Contextual) -->
+<div class="mt-8 bg-surface-container-high p-6 rounded-2xl flex items-center gap-4">
+<div class="h-16 w-16 rounded-full overflow-hidden bg-surface-container-highest shrink-0">
+<img class="w-full h-full object-cover" data-alt="professional DJ portrait with headphones around neck in a dark studio setting with soft glowing neon lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB67FdPX0vyZK_TG3JgJtzQlsGLk_6bPOJnboATIq-X-2naraUWtiM-YG3S_udfevwcUXfMhk4PoAcR1WengRWgBbXyEBCSlsc1TB_-aT33Ct41meoayeh6BX9aZefmnjMqkmMJljysTdPddmU37K_Wu22lkj7QeZyBHmLORD0_bQ-_RDKP1lrOGO7HKl01KnXs6mYp-xVUpCqgdP52poVCzcFFDO0p2tbX1qlnsOpQsWK58VpxOA5HwQ7deKUPlIWOptXlxcCMsnk"/>
+</div>
+<div>
+<h4 class="headline-font font-bold">DJ Pulso Master</h4>
+<p class="text-sm text-on-surface-variant">Melodic Techno &amp; House</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.9</span>
+<span class="text-[10px] text-on-surface-variant ml-2 uppercase tracking-tighter">124 Bookings realizados</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] w-full py-12 px-8 mt-auto border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-7xl mx-auto">
+<span class="font-['Manrope'] font-bold text-[#e6ff00]">Pulso Musical</span>
+<p class="font-['Inter'] text-xs text-white/40">© 2024 Pulso Musical. Todos os direitos reservados.</p>
+<div class="flex gap-6">
+<a class="text-white/40 hover:text-[#e6ff00] text-xs transition-colors" href="#">Termos</a>
+<a class="text-white/40 hover:text-[#e6ff00] text-xs transition-colors" href="#">Privacidade</a>
+<a class="text-white/40 hover:text-[#e6ff00] text-xs transition-colors" href="#">Contato</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#131313]/90 backdrop-blur-xl z-50 rounded-t-2xl">
+<div class="flex flex-col items-center justify-center text-white/50 hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Explorar</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#e6ff00] bg-[#262626] rounded-xl px-4 py-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Agenda</span>
+</div>
+<div class="flex flex-col items-center justify-center text-white/50 hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Bookings</span>
+</div>
+<div class="flex flex-col items-center justify-center text-white/50 hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Perfil</span>
+</div>
+</nav>
+</body></html>

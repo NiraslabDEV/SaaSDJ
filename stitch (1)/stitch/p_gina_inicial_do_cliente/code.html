@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#bacae4",
+                        "surface-container-highest": "#262626",
+                        "on-background": "#ffffff",
+                        "tertiary-container": "#cfdef5",
+                        "on-primary-container": "#525c00",
+                        "on-secondary-fixed": "#29394e",
+                        "on-surface-variant": "#adaaaa",
+                        "surface-tint": "#f7ffba",
+                        "on-primary": "#5a6500",
+                        "primary-fixed-dim": "#d2e900",
+                        "on-error": "#450900",
+                        "inverse-on-surface": "#565555",
+                        "secondary-container": "#38485d",
+                        "on-secondary": "#3c4c61",
+                        "error-container": "#b92902",
+                        "on-primary-fixed": "#414900",
+                        "outline-variant": "#484847",
+                        "on-secondary-fixed-variant": "#46556b",
+                        "primary": "#f7ffba",
+                        "on-secondary-container": "#c1d1eb",
+                        "secondary-fixed": "#c8d8f3",
+                        "background": "#0e0e0e",
+                        "error-dim": "#d53d18",
+                        "tertiary-fixed": "#cfdef5",
+                        "surface-bright": "#2c2c2c",
+                        "on-tertiary-container": "#414f62",
+                        "tertiary-fixed-dim": "#c1d0e6",
+                        "primary-fixed": "#e0f800",
+                        "outline": "#767575",
+                        "error": "#ff7351",
+                        "on-error-container": "#ffd2c8",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary-fixed-variant": "#4a596c",
+                        "surface-container-low": "#131313",
+                        "tertiary": "#e0ecff",
+                        "on-primary-fixed-variant": "#5c6700",
+                        "tertiary-dim": "#c1d0e6",
+                        "secondary": "#c8d8f3",
+                        "on-surface": "#ffffff",
+                        "surface-container-high": "#20201f",
+                        "secondary-dim": "#bacae4",
+                        "surface-variant": "#262626",
+                        "on-tertiary": "#49586b",
+                        "inverse-surface": "#fcf9f8",
+                        "surface-dim": "#0e0e0e",
+                        "surface-container": "#1a1a1a",
+                        "on-tertiary-fixed": "#2e3d4e",
+                        "inverse-primary": "#5a6500",
+                        "surface": "#0e0e0e",
+                        "primary-container": "#e0f800",
+                        "primary-dim": "#d8ef00"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0e0e0e; color: #ffffff; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-[#0e0e0e] text-[#e6ff00] font-['Manrope'] font-bold text-lg fixed top-0 w-full z-[100] border-none bg-[#131313] flex justify-between items-center px-6 py-4">
+<div class="text-xl font-black tracking-tighter text-[#e6ff00] uppercase">Pulso Musical</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#e6ff00] transition-colors" href="#">Explorar</a>
+<a class="text-white/70 hover:bg-white/5 transition-colors px-3 py-1 rounded-full" href="#">Agenda</a>
+<a class="text-white/70 hover:bg-white/5 transition-colors px-3 py-1 rounded-full" href="#">Bookings</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-white/70 hover:bg-white/5 p-2 rounded-full transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-white/70 hover:bg-white/5 p-2 rounded-full transition-colors lg:hidden" data-icon="menu">menu</button>
+</div>
+</header>
+<!-- NavigationDrawer (Large Screen Only) -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-0 h-screen p-6 bg-[#0e0e0e] h-full w-72 border-r border-white/5 z-40 pt-24">
+<div class="flex items-center gap-4 mb-10 px-2">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img alt="DJ Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional DJ in a dark studio setting with subtle yellow neon lighting accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrTwukvvz6pBo-L-o-kkQvppPc90cBWb5NabWSztKR_FjYIaDZrlJVirMo2YXLPIz3rifU42fHpsUeow1b6vkNm7UdE6y8U_7IJF3Yq-FxRP0n1GFgwrdYWOQ_KHvbWejh8PXoL9okhZbby3eC87LKI8J_zru5LMoDyiGAZiSE7JffZ4bFpmXnsCQ20S1yzAgbnLA7fhxUlis-kItzBJInb6LLIrcWBNOkusshyICsqic1EDV8dJIuKUe-ije91K_dgoyOxteWhfk"/>
+</div>
+<div>
+<h3 class="text-on-surface font-headline font-bold leading-tight">Pulso Musical</h3>
+<p class="text-on-surface-variant text-xs font-medium">Painel do Artista</p>
+</div>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 text-[#e6ff00] bg-[#131313] rounded-r-full translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Manrope'] font-semibold">Explorar</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/60 hover:text-white hover:bg-[#20201f] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Manrope'] font-semibold">Agenda</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/60 hover:text-white hover:bg-[#20201f] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-['Manrope'] font-semibold">Meus Bookings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/60 hover:text-white hover:bg-[#20201f] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Manrope'] font-semibold">Perfil</span>
+</a>
+</nav>
+</aside>
+<main class="lg:ml-72 pt-24 pb-32 px-4 md:px-8 max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-7">
+<span class="inline-block px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Booking Aberto 2024</span>
+<h1 class="text-5xl md:text-7xl font-headline font-bold leading-[1.1] mb-6 tracking-tight">Ritmo &amp; <span class="text-primary italic">Conexão</span> High-End.</h1>
+<p class="text-on-surface-variant text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
+                    A Pulso Musical transforma eventos corporativos e festivais em experiências sensoriais únicas através de uma curadoria sonora impecável.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold text-base hover:shadow-[0_0_20px_rgba(247,255,186,0.3)] transition-all flex items-center justify-center gap-2">
+                        Ver Disponibilidade
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="bg-surface-container-high text-on-surface border border-outline-variant/20 px-8 py-4 rounded-xl font-bold text-base hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2">
+                        Escutar Mixes
+                        <span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+</button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] rounded-[2rem] overflow-hidden bg-surface-container-low relative z-10">
+<img alt="DJ Performance" class="w-full h-full object-cover" data-alt="high-angle shot of a professional DJ controller with glowing yellow lights in a dark sophisticated club environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkLLbDrthNRmPC5fXM8GssjG2a4Cju_LzMSIzNggNqa1hBKm8Ise1RNp09uBrpBLgWwOOL0zl5f61eTXo7kPMsTU52U2tGkZXkVk4WWnTAzHBduurTcsZd4G4tUz8DQpF3QdW5EWcnDWDjDnTbU9UPJ4g_qpOdTOr1r0FVBxGia16sN-xEk4SnflIqA362MX1u7Mjynh_iqAYutsk-EqW8ScpRBHN7eDu1RPx4RuLaePFdNWKE8v10Mir6IzApkASThy6WprxXsK8"/>
+</div>
+<!-- Glass Card -->
+<div class="absolute -bottom-6 -left-6 md:-left-12 p-6 bg-surface-variant/60 backdrop-blur-2xl rounded-2xl border border-white/5 shadow-2xl z-20 max-w-xs">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Sincronizado</span>
+</div>
+<div class="flex items-center gap-3">
+<img alt="Google Calendar" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARHJaHeddO0yIwjOjXt5FlFsUH6YyN8aQOZt1pmBd3Zc6IRWAhCFwz6h7H5x0V4I5Pz75XuHAmIclMP8ZRjHoWquS4uHCuQ68of797YQPNJiWEZBYpWV5cF-ag7B-vp-aBxppoDeTSQ-PG4VrvVME-2pivi59H3rKygr4bdMvZJPQsEaBcp2NfUteC8mdYxkqJCBjuVfEh-sRJpNg_JgWZBnI8qAbJfVOLKyYjK9KQqlLorhuE61mZQ1TjIJoc5-FqGy_eD1qVl2U"/>
+<p class="text-sm font-medium text-white/90">Integrado com Google Agenda para respostas em tempo real.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- A História Section (Asymmetric) -->
+<section class="py-20 mb-20">
+<div class="flex flex-col md:flex-row gap-16 items-start">
+<div class="md:w-1/3">
+<h2 class="text-3xl font-headline font-bold text-primary mb-2">A História</h2>
+<div class="w-12 h-1 bg-primary mb-8"></div>
+<p class="text-on-surface-variant leading-loose mb-6">
+                        Nascida da paixão pela pulsação urbana, a Pulso Musical não apenas toca música; ela narra histórias através de ondas sonoras. Com mais de uma década dominando as pistas mais exclusivas, cada set é uma jornada de sofisticação.
+                    </p>
+</div>
+<div class="md:w-2/3 grid grid-cols-2 gap-4">
+<div class="space-y-4 pt-12">
+<div class="h-64 rounded-2xl overflow-hidden">
+<img alt="Vinyl" class="w-full h-full object-cover" data-alt="close-up of a classic vinyl record spinning on a high-end turntable with moody low-key lighting and yellow highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIXqQOBdq80828EK7g_UA89vZKI45rfuXFEVu2z1vpYD8edvWuZtLrdvHSpi8Z3swAjKK1dzpRKic7JsY-I2CO3KS5jLIlSUq73GIICoGiuvyrvAvjwLwyLIreSIlpDgB-7zSAyn3L20jI0Z582G3GQCcPaLEH3uWDeS3bl5UwkoRaoUWwy7yrXK0N2Ez0eAgV0SY9UP5DNZuuabvsrsXbWorgiitcjzg9_IwLbZZezyEOjSnz-MeWao283mqcL7EViuJDRLwuZ_4"/>
+</div>
+<div class="bg-surface-container-low p-8 rounded-2xl">
+<h4 class="text-4xl font-headline font-bold text-white mb-2">500+</h4>
+<p class="text-on-surface-variant text-sm uppercase tracking-widest">Eventos Realizados</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-primary p-8 rounded-2xl h-48 flex flex-col justify-end">
+<span class="material-symbols-outlined text-on-primary text-4xl mb-4" data-icon="grade" style="font-variation-settings: 'FILL' 1;">grade</span>
+<p class="text-on-primary font-bold leading-tight">Curadoria de Elite para Marcas Globais</p>
+</div>
+<div class="h-80 rounded-2xl overflow-hidden">
+<img alt="Club Scene" class="w-full h-full object-cover" data-alt="vibrant silhouettes of a crowd in a premium lounge with minimalist architectural lighting and a warm energetic atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6ddQO9Pf1JrBsBdVovfPiRikDPIVGjPyKIYwHWiJs0U2IIVqcM5EWMHoxdBeOHhpuie-WsxV8WEwSMwgJMMD63W9-hvK9xWslXYXq-g2ZTBkva07Xypkq4Tz7H5lXf7v6YfJKGUn2PsmjmtnrkR4-DMj-GDlipUs4JtxgNPBSfgx8giHk7lRlLBSBfUsTqepwiU0uLMvlOycEFkMYRVxZZjK9_8grZrh-if7iCliXCDl4ysdHihNp6FSfvZW4Vddr4FLCHJ2iQ0w"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Estilo Musical (Bento Grid) -->
+<section class="mb-20">
+<h2 class="text-4xl font-headline font-bold mb-12 text-center">Estilo <span class="text-primary italic">Musical</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="md:col-span-2 bg-surface-container-low rounded-3xl p-8 border border-white/5 hover:bg-surface-container-high transition-all">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="settings_input_component">settings_input_component</span>
+<span class="text-xs font-bold text-on-surface-variant tracking-widest uppercase">Primary Genre</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-4">Deep &amp; Tech House</h3>
+<p class="text-on-surface-variant">Linhas de baixo envolventes e melodias hipnóticas para o início da noite ou momentos de pico.</p>
+</div>
+<div class="bg-[#20201f] rounded-3xl p-8 border border-white/5 hover:bg-surface-container-highest transition-all flex flex-col justify-between">
+<h3 class="text-xl font-headline font-bold mb-4">Nu Disco</h3>
+<p class="text-on-surface-variant text-sm">Glow retro com produção moderna. Sofisticação e diversão.</p>
+<span class="material-symbols-outlined text-primary mt-6" data-icon="flare">flare</span>
+</div>
+<div class="bg-surface-container-low rounded-3xl p-8 border border-white/5 hover:bg-surface-container-high transition-all flex flex-col justify-between">
+<h3 class="text-xl font-headline font-bold mb-4">Soulful Lounge</h3>
+<p class="text-on-surface-variant text-sm">Texturas orgânicas e ritmos suaves para recepções premium.</p>
+<span class="material-symbols-outlined text-primary mt-6" data-icon="waves">waves</span>
+</div>
+<div class="md:col-span-4 bg-primary rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+<div>
+<h3 class="text-3xl font-headline font-bold text-on-primary mb-2">Setup Customizado</h3>
+<p class="text-on-primary/80 max-w-md">Cada set é desenhado do zero para se alinhar ao branding e ao mood específico da sua marca ou evento.</p>
+</div>
+<button class="bg-on-primary text-primary px-8 py-4 rounded-xl font-bold whitespace-nowrap">Solicitar Setlist</button>
+</div>
+</div>
+</section>
+<!-- Logistics Section (Uber/Car Only) -->
+<section class="mb-20 bg-surface-container-low p-8 md:p-12 rounded-[2.5rem] border border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div>
+<h2 class="text-3xl font-headline font-bold mb-4">Logística &amp; <span class="text-primary italic">Acesso</span></h2>
+<p class="text-on-surface-variant max-w-md">Facilitamos a chegada do artista com integração direta para serviços de transporte executivo.</p>
+</div>
+<div class="bg-surface-container-highest px-6 py-4 rounded-2xl flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="directions_car">directions_car</span>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Transporte Oficial</p>
+<p class="text-sm font-bold">Uber Black / Executivo</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="space-y-6">
+<div class="flex gap-6 items-start">
+<div class="flex flex-col items-center pt-2">
+<div class="w-3 h-3 bg-primary rounded-full mb-1"></div>
+<div class="w-[2px] h-20 bg-outline-variant/30"></div>
+<div class="w-3 h-3 bg-secondary rounded-full"></div>
+</div>
+<div class="space-y-12">
+<div>
+<h4 class="text-lg font-bold">Ponto de Partida</h4>
+<p class="text-on-surface-variant text-sm">São Paulo, SP - Studio Pulso</p>
+<div class="mt-2 bg-surface-container-high inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                                    SAÍDA: 20:00
+                                </div>
+</div>
+<div>
+<h4 class="text-lg font-bold">Destino do Evento</h4>
+<p class="text-on-surface-variant text-sm">Endereço será sincronizado via agendamento</p>
+<div class="mt-2 bg-secondary/10 inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold text-secondary">
+<span class="material-symbols-outlined text-[14px]" data-icon="time_to_leave">time_to_leave</span>
+                                    ESTIMATIVA UBER: 15-25 MIN
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-3xl overflow-hidden h-64 lg:h-full min-h-[300px]">
+<img alt="Map Location" class="w-full h-full object-cover grayscale opacity-50 contrast-125" data-alt="abstract grayscale satellite view of urban city grid with high contrast and geometric patterns" data-location="São Paulo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAl-68RkrBk4YA1h-rjkpgUr2Kf47Rgm9H0g3GJNFq7CO5TcdriZPJKDR1jCC_tQNm1AmVnvxgSPUdqHM_99ZxirVNm0AteHAgmkgKnaOzX_kxcTY4qtMAHYW20OmCAO7mpAsHKHmxGMDHbIFeU4kRzuFskkXgAPcNs9vzdritqU9lXVc6DHTnYv29gSCzc6nlswLeyGv3mLbqj9PzscRlZLufrn7CTQepEhnSLcY7kGprQGLwoQCatXZdxUiVrdWILD7gqI1QhR4"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] w-full py-12 px-8 mt-auto border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-7xl mx-auto">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-['Manrope'] font-bold text-[#e6ff00] text-2xl uppercase tracking-tighter">Pulso Musical</div>
+<p class="font-['Inter'] text-xs text-white/40 max-w-xs text-center md:text-left">Elevando a experiência sonora de eventos exclusivos através de curadoria profissional.</p>
+</div>
+<div class="flex flex-col items-center md:items-end gap-6">
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs text-white/40 hover:text-[#e6ff00] transition-colors duration-200" href="#">Termos</a>
+<a class="font-['Inter'] text-xs text-white/40 hover:text-[#e6ff00] transition-colors duration-200" href="#">Privacidade</a>
+<a class="font-['Inter'] text-xs text-white/40 hover:text-[#e6ff00] transition-colors duration-200" href="#">Contato</a>
+</div>
+<p class="font-['Inter'] text-xs text-white/40">© 2024 Pulso Musical. Todos os direitos reservados.</p>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#131313]/90 backdrop-blur-xl z-50 rounded-t-2xl md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-[#e6ff00] bg-[#262626] rounded-xl px-3 py-1 scale-90 duration-150 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/50 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Agenda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/50 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/50 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Perfil</span>
+</a>
+</nav>
+</body></html>

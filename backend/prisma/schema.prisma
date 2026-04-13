@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  passwordHash   String
+  name           String
+  role           Role     @default(ARTIST)
+  profilePicture String?
+  bio            String?
+  genres         String[]
+  yearsActive    Int?
+  baseAddress    String?
+  baseLat        Float?
+  baseLng        Float?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  artistBookings    Booking[]         @relation("ArtistBookings")
+  clientBookings    Booking[]         @relation("ClientBookings")
+  availabilitySlots AvailabilitySlot[]
+  googleToken       GoogleToken?
+  refreshTokens     RefreshToken[]
+  notifications     Notification[]
+}
+
+enum Role {
+  ARTIST
+  CLIENT
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model GoogleToken {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  accessToken  String
+  refreshToken String?
+  expiryDate   DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AvailabilitySlot {
+  id        String   @id @default(cuid())
+  artistId  String
+  startTime DateTime
+  endTime   DateTime
+  type      SlotType
+  artist    User     @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@unique([artistId, startTime, endTime])
+}
+
+enum SlotType {
+  FREE
+  BOOKED
+  BUFFER_BEFORE
+  BUFFER_AFTER
+  MANUAL_BLOCK
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  artistId        String
+  clientId        String
+  status          BookingStatus @default(PENDING)
+  eventDate       DateTime
+  durationHours   Int
+  locationAddress String
+  locationLat     Float?
+  locationLng     Float?
+  baseFee         Float         @default(1200)
+  hourlyRate      Float         @default(300)
+  logisticsFee    Float         @default(150)
+  totalAmount     Float
+  counterOffer    Json?
+  contractPdfUrl  String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  artist        User           @relation("ArtistBookings", fields: [artistId], references: [id])
+  client        User           @relation("ClientBookings", fields: [clientId], references: [id])
+  notifications Notification[]
+
+  @@unique([artistId, eventDate])
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COUNTER_PROPOSAL
+  CANCELLED
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  bookingId String
+  type      NotificationType
+  sentAt    DateTime         @default(now())
+  readAt    DateTime?
+
+  user    User    @relation(fields: [userId], references: [id])
+  booking Booking @relation(fields: [bookingId], references: [id])
+}
+
+enum NotificationType {
+  NEW_PROPOSAL
+  PROPOSAL_ACCEPTED
+  PROPOSAL_REJECTED
+  COUNTER_PROPOSAL_RECEIVED
+  CONTRACT_READY
+}

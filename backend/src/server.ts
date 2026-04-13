@@ -7,8 +7,8 @@ async function main() {
   await prisma.$connect();
   console.log('✅ Banco de dados conectado.');
 
-  app.listen(env.PORT, () => {
-    console.log(`🚀 Pulso Musical rodando em http://localhost:${env.PORT}`);
+  app.listen(env.PORT, '0.0.0.0', () => {
+    console.log(`🚀 Pulso Musical rodando em http://0.0.0.0:${env.PORT}`);
     console.log(`   Ambiente: ${env.NODE_ENV}`);
   });
 }

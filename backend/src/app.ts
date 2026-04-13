@@ -19,12 +19,32 @@ import adminRoutes from './modules/admin/admin.routes';
 
 const app = express();
 
+// Trust Railway's reverse proxy
+app.set('trust proxy', 1);
+
 app.use(
   helmet({
     contentSecurityPolicy: false,
   }),
 );
-app.use(cors({ origin: env.FRONTEND_URL, credentials: true }));
+const allowedOrigins = [
+  env.FRONTEND_URL,
+  'https://pulso-musical-production.up.railway.app',
+  'https://pulso-musical.up.railway.app',
+  'http://localhost:3000',
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all in production for now
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json({ limit: '1mb' }));
 
 const globalLimiter = rateLimit({

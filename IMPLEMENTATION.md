@@ -196,12 +196,30 @@ backend/public/
 **File Created:** `backend/.env` — Development config with PostgreSQL, JWT secrets, and all required variables
 - **Status:** ✅ COMPLETED
 
+### Fix 9: Frontend JS Field Name Mismatches (Critical)
+**Problem:** Frontend JavaScript used field names that didn't match the backend API responses, causing undefined values and broken UI.
+**Files Fixed:**
+- `backend/public/js/dashboard.js` — `total` → `monthly`, `dateTime` → `eventDate`, `location` → `locationAddress`, `eventName` → `artist.name/client.name`, `basePrice` → `totalAmount`
+- `backend/public/js/booking.js` — `dateTime` → `eventDate`, `duration` → `durationHours`, `location` → `locationAddress`, removed `basePrice` (server calculates)
+- `backend/public/js/booking-details.js` — `dateTime` → `eventDate`, `location` → `locationAddress`, `basePrice` → `totalAmount`, `duration` → `durationHours`, `proposedAmount` → `totalAmount`, `proposedDuration` → `durationHours`, `pdfUrl` → `contractPdfUrl`, `eventName` → `artist.name/client.name`
+- **Status:** ✅ COMPLETED
+
+### Fix 10: Index Page Logout Redirect
+**Problem:** Logout button redirected to `/index.html` instead of `/login.html`.
+**File Fixed:** `backend/public/index.html` — Changed `window.location.href = '/index.html'` → `window.location.href = '/login.html'`
+- **Status:** ✅ COMPLETED
+
+### TASK 4: Git & Deployment
+- Repository: https://github.com/NiraslabDEV/SaaSDJ
+- Initial push with all code completed
+- Prisma Client generates successfully
+- TypeScript compiles without errors (`npx tsc --noEmit` clean)
+- **Status:** ✅ COMPLETED
+
 ## Next Steps (Not in scope)
 
-1. Backend API integration testing
-2. PDF contract generation endpoint
-3. Email notifications on booking events
-4. Google Calendar sync implementation
-5. Stripe payments integration
-6. Logistics/Uber integration
-7. Admin dashboard
+1. Backend API integration testing with real PostgreSQL
+2. Google Calendar sync implementation
+3. Stripe payments integration
+4. Logistics/Uber integration
+5. Admin dashboard

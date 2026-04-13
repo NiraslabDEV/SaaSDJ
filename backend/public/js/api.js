@@ -97,7 +97,12 @@ async function apiFetch(endpoint, options = {}) {
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: 'Erro desconhecido' }));
-    throw new Error(error.message || `HTTP ${response.status}`);
+    // Handle validation errors with details
+    if (error.details) {
+      const fieldErrors = Object.values(error.details).flat().join(' ');
+      throw new Error(fieldErrors || error.error || `HTTP ${response.status}`);
+    }
+    throw new Error(error.error || error.message || `HTTP ${response.status}`);
   }
 
   return await response.json();

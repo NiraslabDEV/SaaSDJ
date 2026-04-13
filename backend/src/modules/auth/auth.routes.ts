@@ -9,6 +9,7 @@ const router = Router();
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 5,
+  validate: { trustProxy: false },
   message: { error: 'Muitas tentativas. Tente novamente em 15 minutos.', code: 'RATE_LIMITED' },
 });
 

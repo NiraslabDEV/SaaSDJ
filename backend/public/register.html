@@ -144,9 +144,10 @@
             <div class="space-y-2">
               <label class="font-label text-xs uppercase tracking-widest text-on-surface-variant font-semibold" for="password">Senha Segura</label>
               <div class="relative group">
-                <input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary-container transition-all placeholder:text-outline/40" id="password" placeholder="••••••••••" type="password" required />
+                <input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary-container transition-all placeholder:text-outline/40" id="password" placeholder="••••••••••" type="password" required minlength="8" />
                 <span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline material-symbols-outlined opacity-50 group-focus-within:text-primary-container group-focus-within:opacity-100">lock</span>
               </div>
+              <p class="text-[10px] text-on-surface-variant mt-1">Mínimo 8 caracteres, 1 letra maiúscula e 1 número.</p>
             </div>
 
             <!-- Role Select -->
@@ -230,7 +231,16 @@
           const route = data.user.role === 'ARTIST' ? '/dashboard.html' : '/index.html';
           window.location.href = route;
         } catch (err) {
-          errorMsg.textContent = err.message || 'Erro ao criar conta. Tente novamente.';
+          let msg = err.message || 'Erro ao criar conta. Tente novamente.';
+          // Try to extract validation details
+          try {
+            const resp = JSON.parse(err.message);
+            if (resp.details) {
+              const fieldErrors = Object.values(resp.details).flat().join(' ');
+              msg = fieldErrors || msg;
+            }
+          } catch {}
+          errorMsg.textContent = msg;
           errorMsg.classList.remove('hidden');
           submitBtn.disabled = false;
           btnText.textContent = 'CRIAR CONTA';

@@ -47,4 +47,62 @@ export async function geocodeAddress(address: string): Promise<{ lat: number; ln
   }
 }
 
+interface UberEstimate {
+  distanceKm: number;
+  durationMin: number;
+  estimateLow: number;
+  estimateHigh: number;
+  currency: string;
+  provider: string;
+}
+
+export async function getUberEstimate(
+  startLat: number,
+  startLng: number,
+  endLat: number,
+  endLng: number,
+): Promise<UberEstimate> {
+  const distKm = haversineKm(startLat, startLng, endLat, endLng);
+  const durationMin = Math.round(distKm * 2.5); // ~2.5 min/km average urban
+
+  // If Uber API credentials are configured, try real API
+  if (process.env.UBER_SERVER_TOKEN) {
+    try {
+      const url = `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`;
+      const resp = await fetch(url, {
+        headers: { Authorization: `Token ${process.env.UBER_SERVER_TOKEN}` },
+      });
+      const data = await resp.json() as { prices?: Array<{ localized_display_name: string; low_estimate: number; high_estimate: number; currency_code: string }> };
+      const uberX = data.prices?.find(p => p.localized_display_name === 'UberX');
+      if (uberX) {
+        return {
+          distanceKm: Math.round(distKm * 10) / 10,
+          durationMin,
+          estimateLow: uberX.low_estimate,
+          estimateHigh: uberX.high_estimate,
+          currency: uberX.currency_code || 'BRL',
+          provider: 'Uber',
+        };
+      }
+    } catch (err) {
+      console.error('[UBER API] Failed, using mock estimate:', err);
+    }
+  }
+
+  // Mock estimate: R$ 2.50/km + R$ 5 base
+  const baseFare = 5;
+  const perKm = 2.5;
+  const low = Math.round((baseFare + distKm * perKm) * 100) / 100;
+  const high = Math.round(low * 1.4 * 100) / 100;
+
+  return {
+    distanceKm: Math.round(distKm * 10) / 10,
+    durationMin,
+    estimateLow: low,
+    estimateHigh: high,
+    currency: 'BRL',
+    provider: 'mock',
+  };
+}
+
 export { BASE_FEE, HOURLY_RATE };

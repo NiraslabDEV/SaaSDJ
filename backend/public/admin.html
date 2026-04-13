@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin – Pulso Musical</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --surface2: #1e1e1e;
+      --border: #2a2a2a;
+      --accent: #e6ff00;
+      --accent-dim: rgba(230, 255, 0, 0.15);
+      --text: #ffffff;
+      --text2: #a0a0a0;
+      --danger: #ff4444;
+      --success: #00c853;
+      --warning: #ffab00;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    .layout { display: flex; min-height: 100vh; }
+    
+    /* Sidebar */
+    .sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 16px; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; }
+    .sidebar h2 { font-family: 'Manrope', sans-serif; color: var(--accent); font-size: 20px; margin-bottom: 8px; }
+    .sidebar .role-badge { display: inline-block; background: var(--accent-dim); color: var(--accent); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
+    .sidebar nav a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; margin-bottom: 4px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background: var(--accent-dim); color: var(--accent); }
+    .sidebar nav a .icon { font-size: 18px; }
+
+    /* Main */
+    .main { margin-left: 240px; flex: 1; padding: 32px; }
+    .main h1 { font-family: 'Manrope', sans-serif; font-size: 28px; margin-bottom: 24px; }
+
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .stat-card .label { font-size: 12px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .stat-card .value { font-family: 'Manrope', sans-serif; font-size: 28px; color: var(--accent); }
+    .stat-card .sub { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+    .tab-btn { background: transparent; border: none; color: var(--text2); font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { background: var(--accent-dim); color: var(--accent); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); padding: 12px 16px; border-bottom: 1px solid var(--border); }
+    td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover { background: var(--surface2); }
+
+    /* Badges */
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .badge-artist { background: rgba(0, 200, 83, 0.15); color: #00c853; }
+    .badge-client { background: rgba(0, 150, 255, 0.15); color: #0096ff; }
+    .badge-admin { background: var(--accent-dim); color: var(--accent); }
+    .badge-pending { background: rgba(255, 171, 0, 0.15); color: #ffab00; }
+    .badge-approved { background: rgba(0, 200, 83, 0.15); color: #00c853; }
+    .badge-rejected { background: rgba(255, 68, 68, 0.15); color: #ff4444; }
+    .badge-paid { background: rgba(0, 200, 83, 0.15); color: #00c853; }
+    .badge-refunded { background: rgba(255, 68, 68, 0.15); color: #ff4444; }
+    .badge-cancelled { background: rgba(128, 128, 128, 0.15); color: #888; }
+
+    /* Button */
+    .btn { padding: 8px 16px; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-accent { background: var(--accent); color: #000; }
+    .btn-accent:hover { filter: brightness(0.9); }
+    .btn-sm { padding: 5px 10px; font-size: 12px; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text2); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Select */
+    select { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 6px; font-size: 13px; }
+
+    /* Loading */
+    .loading { text-align: center; padding: 40px; color: var(--text2); }
+    .spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Pulso</h2>
+      <span class="role-badge">Admin</span>
+      <nav>
+        <a href="/dashboard.html" class="icon">📊 Dashboard</a>
+        <a href="/admin.html" class="active icon">⚙️ Admin Panel</a>
+        <a href="/booking.html" class="icon">📅 Bookings</a>
+        <a href="/profile.html" class="icon">👤 Perfil</a>
+        <a href="#" onclick="logout();window.location.href='/login.html'" class="icon">🚪 Sair</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <h1>Painel Administrativo</h1>
+
+      <!-- Stats -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="loading"><div class="spinner"></div><p style="margin-top:12px">Carregando...</p></div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('users')">Usuários</button>
+        <button class="tab-btn" onclick="switchTab('bookings')">Bookings</button>
+        <button class="tab-btn" onclick="switchTab('payments')">Pagamentos</button>
+      </div>
+
+      <!-- Users Tab -->
+      <div class="tab-content active" id="tab-users">
+        <div style="margin-bottom:16px; display:flex; gap:12px; align-items:center;">
+          <select id="roleFilter" onchange="loadUsers()">
+            <option value="">Todos os roles</option>
+            <option value="ARTIST">Artistas</option>
+            <option value="CLIENT">Clientes</option>
+            <option value="ADMIN">Admins</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Nome</th><th>Email</th><th>Role</th><th>Bookings</th><th>Criado</th><th>Ações</th></tr>
+            </thead>
+            <tbody id="usersTable"><tr><td colspan="6" class="loading">Carregando...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bookings Tab -->
+      <div class="tab-content" id="tab-bookings">
+        <div style="margin-bottom:16px; display:flex; gap:12px; align-items:center;">
+          <select id="statusFilter" onchange="loadBookings()">
+            <option value="">Todos os status</option>
+            <option value="PENDING">Pendente</option>
+            <option value="APPROVED">Aprovado</option>
+            <option value="REJECTED">Rejeitado</option>
+            <option value="CANCELLED">Cancelado</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Data</th><th>Artista</th><th>Cliente</th><th>Local</th><th>Valor</th><th>Status</th><th>Pagamento</th></tr>
+            </thead>
+            <tbody id="bookingsTable"><tr><td colspan="7" class="loading">Carregando...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Payments Tab -->
+      <div class="tab-content" id="tab-payments">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Data</th><th>Artista</th><th>Cliente</th><th>Valor</th><th>Taxa</th><th>Status</th><th>Método</th></tr>
+            </thead>
+            <tbody id="paymentsTable"><tr><td colspan="7" class="loading">Carregando...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script>
+    // Check admin access
+    const user = getUser();
+    if (!user || user.role !== 'ADMIN') {
+      window.location.href = '/index.html';
+    }
+
+    // Load stats
+    async function loadStats() {
+      try {
+        const stats = await getAdminStats();
+        document.getElementById('statsGrid').innerHTML = `
+          <div class="stat-card">
+            <div class="label">Usuários</div>
+            <div class="value">${stats.users.total}</div>
+            <div class="sub">${stats.users.artists} artistas · ${stats.users.clients} clientes</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Bookings</div>
+            <div class="value">${stats.bookings.total}</div>
+            <div class="sub">${stats.bookings.pending} pendentes</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Receita Total</div>
+            <div class="value">R$ ${(stats.revenue.total || 0).toLocaleString('pt-BR')}</div>
+            <div class="sub">${stats.revenue.paidPayments} pagamentos</div>
+          </div>
+          ${stats.monthlyRevenue ? stats.monthlyRevenue.map(m => `
+            <div class="stat-card">
+              <div class="label">${m.month}</div>
+              <div class="value">R$ ${(m.revenue || 0).toLocaleString('pt-BR')}</div>
+            </div>
+          `).join('') : ''}
+        `;
+      } catch (err) {
+        document.getElementById('statsGrid').innerHTML = `<p style="color:var(--danger)">Erro ao carregar: ${err.message}</p>`;
+      }
+    }
+
+    // Load users
+    async function loadUsers() {
+      const role = document.getElementById('roleFilter').value;
+      try {
+        const data = await getAdminUsers(1, 50, role || undefined);
+        const tbody = document.getElementById('usersTable');
+        if (!data.users.length) {
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text2)">Nenhum usuário encontrado</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data.users.map(u => `
+          <tr>
+            <td><strong>${u.name}</strong></td>
+            <td style="color:var(--text2)">${u.email}</td>
+            <td><span class="badge badge-${u.role.toLowerCase()}">${u.role}</span></td>
+            <td>${(u._count?.artistBookings || 0) + (u._count?.clientBookings || 0)}</td>
+            <td style="color:var(--text2)">${new Date(u.createdAt).toLocaleDateString('pt-BR')}</td>
+            <td>
+              <select class="btn-sm btn-outline" onchange="handleChangeRole('${u.id}', this.value)">
+                <option value="ARTIST" ${u.role === 'ARTIST' ? 'selected' : ''}>Artista</option>
+                <option value="CLIENT" ${u.role === 'CLIENT' ? 'selected' : ''}>Cliente</option>
+                <option value="ADMIN" ${u.role === 'ADMIN' ? 'selected' : ''}>Admin</option>
+              </select>
+            </td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        document.getElementById('usersTable').innerHTML = `<tr><td colspan="6" style="color:var(--danger)">Erro: ${err.message}</td></tr>`;
+      }
+    }
+
+    // Load bookings
+    async function loadBookings() {
+      const status = document.getElementById('statusFilter').value;
+      try {
+        const data = await getAdminBookings(1, 50, status || undefined);
+        const tbody = document.getElementById('bookingsTable');
+        if (!data.bookings.length) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text2)">Nenhum booking encontrado</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data.bookings.map(b => `
+          <tr>
+            <td>${new Date(b.eventDate).toLocaleDateString('pt-BR')}</td>
+            <td>${b.artist?.name || '-'}</td>
+            <td>${b.client?.name || '-'}</td>
+            <td style="color:var(--text2);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${b.locationAddress || '-'}</td>
+            <td>R$ ${(b.totalAmount || 0).toLocaleString('pt-BR')}</td>
+            <td><span class="badge badge-${b.status.toLowerCase()}">${b.status}</span></td>
+            <td>${b.payment ? `<span class="badge badge-${b.payment.status.toLowerCase()}">${b.payment.status}</span>` : '-'}</td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        document.getElementById('bookingsTable').innerHTML = `<tr><td colspan="7" style="color:var(--danger)">Erro: ${err.message}</td></tr>`;
+      }
+    }
+
+    // Load payments
+    async function loadPayments() {
+      try {
+        const data = await getAdminPayments(1, 50);
+        const tbody = document.getElementById('paymentsTable');
+        if (!data.payments.length) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text2)">Nenhum pagamento encontrado</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data.payments.map(p => `
+          <tr>
+            <td>${new Date(p.createdAt).toLocaleDateString('pt-BR')}</td>
+            <td>${p.booking?.artist?.name || '-'}</td>
+            <td>${p.booking?.client?.name || '-'}</td>
+            <td>R$ ${(p.amount || 0).toLocaleString('pt-BR')}</td>
+            <td>R$ ${(p.platformFee || 0).toLocaleString('pt-BR')}</td>
+            <td><span class="badge badge-${p.status.toLowerCase()}">${p.status}</span></td>
+            <td>${p.method}</td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        document.getElementById('paymentsTable').innerHTML = `<tr><td colspan="7" style="color:var(--danger)">Erro: ${err.message}</td></tr>`;
+      }
+    }
+
+    // Change role
+    async function handleChangeRole(userId, newRole) {
+      if (!confirm(`Tem certeza que deseja alterar o role para ${newRole}?`)) return;
+      try {
+        await changeUserRole(userId, newRole);
+        loadUsers();
+      } catch (err) {
+        alert('Erro: ' + err.message);
+      }
+    }
+
+    // Tab switching
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(`tab-${tab}`).classList.add('active');
+      
+      if (tab === 'users') loadUsers();
+      if (tab === 'bookings') loadBookings();
+      if (tab === 'payments') loadPayments();
+    }
+
+    // Init
+    loadStats();
+    loadUsers();
+  </script>
+</body>
+</html>

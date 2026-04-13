@@ -34,6 +34,7 @@ model User {
 enum Role {
   ARTIST
   CLIENT
+  ADMIN
 }
 
 model RefreshToken {
@@ -95,6 +96,7 @@ model Booking {
   artist        User           @relation("ArtistBookings", fields: [artistId], references: [id])
   client        User           @relation("ClientBookings", fields: [clientId], references: [id])
   notifications Notification[]
+  payment       Payment?
 
   @@unique([artistId, eventDate])
 }
@@ -125,4 +127,39 @@ enum NotificationType {
   PROPOSAL_REJECTED
   COUNTER_PROPOSAL_RECEIVED
   CONTRACT_READY
+  PAYMENT_PENDING
+  PAYMENT_CONFIRMED
+  PAYMENT_FAILED
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  bookingId       String        @unique
+  stripeSessionId String?
+  stripePaymentId String?
+  amount          Float
+  platformFee     Float         @default(0)
+  artistPayout    Float         @default(0)
+  status          PaymentStatus @default(PENDING)
+  method          PaymentMethod @default(STRIPE)
+  paidAt          DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  booking Booking @relation(fields: [bookingId], references: [id])
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  STRIPE
+  PIX
+  MANUAL
 }

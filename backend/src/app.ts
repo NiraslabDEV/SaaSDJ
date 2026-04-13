@@ -14,6 +14,8 @@ import calendarRoutes from './modules/calendar/calendar.routes';
 import contractsRoutes from './modules/contracts/contracts.routes';
 import paymentsRoutes from './modules/payments/payments.routes';
 import notificationsRoutes from './modules/notifications/notifications.routes';
+import logisticsRoutes from './modules/logistics/logistics.routes';
+import adminRoutes from './modules/admin/admin.routes';
 
 const app = express();
 
@@ -43,6 +45,8 @@ app.use('/api/calendar', calendarRoutes);
 app.use('/api/contracts', contractsRoutes);
 app.use('/api/payments', paymentsRoutes);
 app.use('/api/notifications', notificationsRoutes);
+app.use('/api/logistics', logisticsRoutes);
+app.use('/api/admin', adminRoutes);
 
 const publicDir = path.join(process.cwd(), 'public');
 app.use(express.static(publicDir));

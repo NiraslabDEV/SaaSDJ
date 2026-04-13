@@ -220,6 +220,118 @@ async function getArtists() {
 }
 
 // ============================================
+// Payments Functions
+// ============================================
+
+async function createPaymentSession(bookingId) {
+  return apiFetch('/payments/checkout', {
+    method: 'POST',
+    body: { bookingId },
+  });
+}
+
+async function getPaymentStatus(bookingId) {
+  return apiFetch(`/payments/booking/${bookingId}`);
+}
+
+async function listPayments() {
+  return apiFetch('/payments/list');
+}
+
+async function confirmPayment(bookingId, method = 'MANUAL') {
+  return apiFetch(`/payments/booking/${bookingId}/confirm`, {
+    method: 'POST',
+    body: { method },
+  });
+}
+
+async function refundPayment(bookingId) {
+  return apiFetch(`/payments/booking/${bookingId}/refund`, {
+    method: 'POST',
+  });
+}
+
+// ============================================
+// Calendar Functions
+// ============================================
+
+async function getGoogleAuthUrl() {
+  return apiFetch('/calendar/google/auth');
+}
+
+async function getCalendarEvents() {
+  return apiFetch('/calendar/events');
+}
+
+async function getAvailability(artistId, from, to) {
+  return apiFetch(`/calendar/availability?artistId=${artistId}&from=${from}&to=${to}`);
+}
+
+async function addCalendarBlock(startTime, endTime) {
+  return apiFetch('/calendar/blocks', {
+    method: 'POST',
+    body: { startTime, endTime },
+  });
+}
+
+// ============================================
+// Logistics Functions
+// ============================================
+
+async function calculateLogistics(data) {
+  return apiFetch('/logistics/calculate', {
+    method: 'POST',
+    body: data,
+  });
+}
+
+async function geocodeAddress(address) {
+  return apiFetch('/logistics/geocode', {
+    method: 'POST',
+    body: { address },
+  });
+}
+
+async function getUberEstimate(startLat, startLng, endLat, endLng) {
+  return apiFetch('/logistics/uber-estimate', {
+    method: 'POST',
+    body: { startLat, startLng, endLat, endLng },
+  });
+}
+
+// ============================================
+// Admin Functions
+// ============================================
+
+async function getAdminStats() {
+  return apiFetch('/admin/stats');
+}
+
+async function getAdminUsers(page = 1, limit = 20, role) {
+  const params = new URLSearchParams({ page, limit });
+  if (role) params.set('role', role);
+  return apiFetch(`/admin/users?${params}`);
+}
+
+async function getAdminBookings(page = 1, limit = 20, status) {
+  const params = new URLSearchParams({ page, limit });
+  if (status) params.set('status', status);
+  return apiFetch(`/admin/bookings?${params}`);
+}
+
+async function getAdminPayments(page = 1, limit = 20) {
+  const params = new URLSearchParams({ page, limit });
+  return apiFetch(`/admin/payments?${params}`);
+}
+
+async function changeUserRole(userId, role) {
+  return apiFetch(`/admin/users/${userId}/role`, {
+    method: 'PATCH',
+    body: { role },
+  });
+}
+
+// ============================================
 // Utility Functions
 // ============================================
 

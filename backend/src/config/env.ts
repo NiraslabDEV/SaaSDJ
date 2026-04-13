@@ -18,6 +18,12 @@ const envSchema = z.object({
   GOOGLE_CLIENT_SECRET: z.string().optional(),
   GOOGLE_REDIRECT_URI: z.string().optional(),
   ENCRYPTION_KEY: z.string().optional(),
+  STRIPE_SECRET_KEY: z.string().optional(),
+  STRIPE_WEBHOOK_SECRET: z.string().optional(),
+  STRIPE_PLATFORM_FEE_PERCENT: z.coerce.number().default(10),
+  UBER_CLIENT_ID: z.string().optional(),
+  UBER_CLIENT_SECRET: z.string().optional(),
+  UBER_SERVER_TOKEN: z.string().optional(),
 });
 
 function loadEnv() {
